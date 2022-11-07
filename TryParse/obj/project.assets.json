@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Workzone\\TryParse\\TryParse\\TryParse.csproj",
+      "projectUniqueName": "D:\\Workzone\\TryParse\\try2parse\\TryParse\\TryParse.csproj",
       "projectName": "TryParse",
-      "projectPath": "D:\\Workzone\\TryParse\\TryParse\\TryParse.csproj",
+      "projectPath": "D:\\Workzone\\TryParse\\try2parse\\TryParse\\TryParse.csproj",
       "packagesPath": "C:\\Users\\Jesus\\.nuget\\packages\\",
-      "outputPath": "D:\\Workzone\\TryParse\\TryParse\\obj\\",
+      "outputPath": "D:\\Workzone\\TryParse\\try2parse\\TryParse\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Visual Studio\\Shared\\NuGetPackages"

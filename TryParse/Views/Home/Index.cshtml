@@ -23,28 +23,84 @@
 </div>
 <hr />
 <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start pt-4">
-
     <form class="col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <input type="search" class="pe-5 form-control form-control-dark" placeholder="Search..." aria-label="Search">
     </form>
 
     <div class="col-12 col-lg-auto mb-3 mb-lg-0 ">
-        <button type="button" class="my-1 btn btn-outline-primary">Create a new Parsed-Card</button>
-        <button type="button" class="my-1 btn btn-primary">Create with our Telegram-Bot</button>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#cardModal" class="my-1 btn btn-outline-danger">Create a new Parsed-Card</button>
+        <a href="https://t.me/MagmaLord14"><button type="button" class="my-1 btn btn-primary">Create with our Telegram-Bot</button></a>
     </div>
 </div>
 
+<div class="min-vh-100 container pt-4 pb-4 mt-4 container-fluid border border-3 rounded">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @for (int i = 0; i < 10; ++i)
+        {
+            <div class="col">
+                <div class="card">
+                    <img class="card-img-top" src="https://assets.reedpopcdn.com/jetstreamsam.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/jetstreamsam.jpg" />
 
-<div class="mt-4 container border rounded">
-    <div class="card-group">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <h5>Иван Иванов</h5>
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h5>Иван Иванов</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p>Тупа слили, маму слили, папу слили</p>
+                            <p><strong>Номерок</strong>: 7228998465</p>
+                            <p><strong>Описание</strong>: kewk </p>
+                            <p><strong>Доп.инфа</strong>: kekw </p>
+
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                        2 days ago
+                    </div>
+
                 </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div id="cardModal" class="modal fade" aria-hidden="true" aria-labelledby="cardModalLabel" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cardModalLabel">New ParsedCard</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Username</label>
+                        <input type="text" required class="form-control" id="name" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Number:</label>
+                        <input type="tel" maxlength="12" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="e.g, 910-223-2341" class="form-control" id="number" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="descrition-text" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="desc"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descrition-text" class="col-form-label">More Info:</label>
+                        <textarea class="form-control" id="morei"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Post!</button>
+                    </div>
+                </form>
             </div>
 
         </div>
+
 
     </div>
 </div>

@@ -1,4 +1,10 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
+document.addEventListener("mousemove", (event) => {
+    document.body.style.backgroundPositionX = -event.pageX / 100 + "px";
+    document.body.style.backgroundPositionY = -event.pageY / 100 + "px";
+});
 
-// Write your JavaScript code.
+document.onloadstart = (event) => {
+    if (window.screen.width < 1200)
+        document.body.style.background = "rbg(13,17,23)";
+}

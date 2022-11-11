@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TryParse</title>
+    <title>@ViewData["Title"] | ExtremeParse</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TryParse.styles.css" asp-append-version="true" />
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
 </head>
 <body>
     <style>
@@ -21,7 +23,7 @@
     <header class="p-3 text-dark bg-dark overflow-hidden">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <span id="label" class="display-4 fs-1 mx-auto text-white-50 border border-secondary">Try2Parse</span>
+                <span id="label" class="display-4 fs-1 mx-auto text-white-50 border border-secondary">ExtremeParse</span>
                 <ul id="fcknav" class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0 position-static top-0 end-0">
                     <li><strong><a href="~/" class="nav-link px-3 hoverable text-secondary">Home</a></strong></li>
                     <li><strong><a href="~/Home/Privacy" class="nav-link hoverable px-3 text-white">Privacy</a></strong></li>
@@ -32,16 +34,20 @@
     </header>
 
 
-    <div class="offcanvas offcanvas-top" style="background-image: url('https://img.freepik.com/free-vector/white-abstract-background-design_23-2148825582.jpg?w=1380&t=st=1667398269~exp=1667398869~hmac=2602f9d879a2373ea8cb1891552229392da6436e9c0afbd84edc2e6788255cf4');" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+    <div class="offcanvas offcanvas-backg offcanvas-top rounded-bottom" style="" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
         <div class="offcanvas-header">
-            <h1 id="offcanvasTopLabel" class="offcanvas-title fw-normal mx-auto">A <strong>Try2Parse</strong> Project</h1>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" style="color:#9780e5;" class="hell me-4 ms-3 bi bi-info-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+            </svg>
+            <h1 id="offcanvasTopLabel" class=" fw-gradient offcanvas-title mx-auto"><strong>ExtremeParse</strong> project</h1>
+            <button type="button" class="btn-close me-3 btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
 
         <hr style="margin: 0 20% 0 20%;" />
 
         <div class="offcanvas-body text-center" style="margin-right: 20px; margin-left: 20px;">
-            <p class="mx-3" style="font-size: larger; font-family: 'Segoe UI'">
+            <p class="mx-3 opacity-100" style="font-size: larger; color: aliceblue; font-family: 'Segoe UI'">
                 Классика Расчленинграда. В реке под Петербургом нашли сумку с женскими ногами
 
                 В сумке оказались отрезанные по таз две женские ноги. На ногах — следы педикюра. По другим источникам предварительно известно, что конечности были отсечены в районе колена каким-то острым рубящим предметом. Сообщается, что останки могли находилиться в воде больше недели.
@@ -65,7 +71,7 @@
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <p class="ms-4 col-md-4 mb-0 text-muted">&copy; 2022 Nanomachines Company, Inc</p>
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="mx-auto my-auto bi bi-code-slash" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="color:gray" fill="currentColor" class="mx-auto my-auto bi bi-code-slash" viewBox="0 0 16 16">
                 <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z" />
             </svg>
 
@@ -77,10 +83,8 @@
         </footer>
     </div>
 
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

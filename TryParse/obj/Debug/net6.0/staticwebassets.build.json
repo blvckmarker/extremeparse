@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tVhwE+h9gJcW4LrtcjzGvB99t2PQIUWAAN5LcUkhjKc=",
+  "Hash": "O3DINrUbaH7muH4ScyX4vtj4JncleKdJEicpddRqD1k=",
   "Source": "TryParse",
   "BasePath": "_content/TryParse",
   "Mode": "Default",
@@ -68,6 +68,23 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
+      "Identity": "D:\\Workzone\\TryParse\\try2parse\\TryParse\\wwwroot\\favicon.bmp",
+      "SourceId": "TryParse",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Workzone\\TryParse\\try2parse\\TryParse\\wwwroot\\",
+      "BasePath": "_content/TryParse",
+      "RelativePath": "favicon.bmp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\favicon.bmp"
+    },
+    {
       "Identity": "D:\\Workzone\\TryParse\\try2parse\\TryParse\\wwwroot\\favicon.ico",
       "SourceId": "TryParse",
       "SourceType": "Discovered",
@@ -83,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\Workzone\\TryParse\\try2parse\\TryParse\\wwwroot\\img\\wallpaper.png",
+      "SourceId": "TryParse",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Workzone\\TryParse\\try2parse\\TryParse\\wwwroot\\",
+      "BasePath": "_content/TryParse",
+      "RelativePath": "img/wallpaper.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\wallpaper.png"
     },
     {
       "Identity": "D:\\Workzone\\TryParse\\try2parse\\TryParse\\wwwroot\\js\\site.js",

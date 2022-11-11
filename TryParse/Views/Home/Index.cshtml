@@ -1,20 +1,27 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
+    int idInc = default;
+    var uri = new Uri("https://assets.reedpopcdn.com/jetstreamsam.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/jetstreamsam.jpg");
 }
 
+<style>
+    .acc-img {
+        background-position-x: 50%;
+        background-image: linear-gradient(270deg, rgba(0,0,0,0.15), rgba(0, 0, 0, 0.7) ), url(@uri.AbsoluteUri);
+    }
+</style>
 
-
-<div class="container border rounded border-warning">
-    <p class="font-monospace my-2 mx-2">Description</p>
+<div class="container border bordercolor bg-gradient ">
+    <p class="my-2 mx-2 fw-gradient mb-me-auto " style="font-size: 20px; font-weight:600;">Description</p>
     <ul class="text-justify">
         <li>
-            <p class="fw-conc" style="font-size:smaller">
-                Post the information that you think is necessary! But please note that all <span style="font-style:italic">Parsed-card</span>'s are checked by the administration,
+            <p class="fw-conc">
+                Post the information that you think is necessary! But please note that all <span style="font-style:italic">Parssa</span>'s are checked by the administration,
                 so we advise you to filter the content.
             </p>
         </li>
         <li>
-            <p class="fw-conc" style="font-size:smaller">
+            <p class="fw-conc">
                 Or automate the process, using our integrated telegram bot, but in this case,
                 the result may contain <span class="text-decoration-underline">little or no information</span> <strong>freely available on the Internet.</strong>
             </p>
@@ -22,79 +29,105 @@
     </ul>
 </div>
 <hr />
-<div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start pt-4">
+<div class="container d-flex flex-wrap align-items-center justify-content-center pt-4">
     <form class="col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <input type="search" class="pe-5 form-control form-control-dark" placeholder="Search..." aria-label="Search">
+        <input type="search" class="me-5 form-control form-control" placeholder="Zzzz..." aria-label="Search">
     </form>
 
     <div class="col-12 col-lg-auto mb-3 mb-lg-0 ">
         <button type="button" data-bs-toggle="modal" data-bs-target="#cardModal" class="my-1 btn btn-outline-danger">Create a new Parsed-Card</button>
-        <a href="https://t.me/MagmaLord14"><button type="button" class="my-1 btn btn-primary">Create with our Telegram-Bot</button></a>
+        <a href="https://t.me/MagmaLord14"><button type="button" class="my-1 btn btn-purple ">Create with our Telegram-Bot</button></a>
     </div>
 </div>
 
-<div class="min-vh-100 container pt-4 pb-4 mt-4 container-fluid border border-3 rounded">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @for (int i = 0; i < 10; ++i)
-        {
-            <div class="col">
-                <div class="card">
-                    <img class="card-img-top" src="https://assets.reedpopcdn.com/jetstreamsam.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/jetstreamsam.jpg" />
-
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h5>Иван Иванов</h5>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-text">
-                            <p>Тупа слили, маму слили, папу слили</p>
-                            <p><strong>Номерок</strong>: 7228998465</p>
-                            <p><strong>Описание</strong>: kewk </p>
-                            <p><strong>Доп.инфа</strong>: kekw </p>
-
-                        </div>
-
-                    </div>
-                    <div class="card-footer text-muted text-center">
-                        2 days ago
-                    </div>
-
-                </div>
-            </div>
-        }
+<div class="form-group mt-3 row">
+    <label class="text-white col-sm-1 col-form-label ms-2">Sort by <span class="ms-2 text-secondary">|</span></label>
+    <div class="col-10 my-auto">
+        <input type="radio" name="toggle-radio" id="sName" value="Name" class="form-check-input"/>   <label for="sName" class="text-white ms-2 me-3">Name</label>
+        <input type="radio" name="toggle-radio" id="sDate" value="Date" class="form-check-input"/>   <label for="sDate" class="text-white ms-2 me-3">Date</label>
+        <input type="radio" name="toggle-radio" id="sTB" value="Telegram-Bot" class="form-check-input"/>     <label for="sTB" class="text-white ms-2 me-3">Telegram-Bot</label>
+        <input type="radio" name="toggle-radio" id="sParssa" value="Parssa" class="form-check-input "/> <label for="sParssa" class="text-white ms-2 me-3">Parssa</label>
     </div>
+</div>
+
+<div class="min-vh-100 container pt-4 pb-4 mt-4 container-fluid border border-3 rounded bg-gray">
+    <div class="accordion">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @for (int i = 0; i < 30; ++i)
+            {
+                <div class="col">
+                    <p class="me-5 ms-5 border-end border-start border-top border-secondary text-secondary text-center">Monday, 11.11.2022</p>
+                    <div class="accordion-item m-2">
+                        <div class="accordion-header" id="header-@idInc">
+                            <button class="accordion-button acc-img" style="background-size: cover; background-position-y: 50%;" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@idInc" aria-expanded="true" aria-controls="collapse-@idInc">
+                                <span style="font-size:larger; font-weight:600 ; color:darkgray">Иван Иванов</span>
+                            </button>
+
+                        </div>
+                        <div class="accordion-collapse collapse" id="collapse-@idInc" aria-labelledby="header-@idInc">
+                            <div class="accordion-body">
+                                <div class="card" style="background-color: rgba(0,0,0,0.6); ">
+                                    <img class="card-img-top" src=@uri.AbsoluteUri />
+                                    <div class="card-header">
+                                        <div class="wht-text card-title">
+                                            <h5>Иван Иванов</h5>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-text">
+                                            <p class="wht-text">Тупа слили, маму слили, папу слили</p>
+                                            <p class="wht-text"><strong>Номерок</strong>: 7228998465</p>
+                                            <p class="wht-text"><strong>Описание</strong>: kewk </p>
+                                            <p class="wht-text"><strong>Доп.инфа</strong>: kekw </p>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="card-footer text-muted text-center">
+                                        2 days ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="me-5 ms-5 border-end border-start border-bottom border-secondary text-secondary text-center">Created by Telegram Bot</p>
+                </div>
+                ++idInc;
+            }
+        </div>
+    </div>
+
 </div>
 
 <div id="cardModal" class="modal fade" aria-hidden="true" aria-labelledby="cardModalLabel" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
+    <div class="modal-dialog " >
+        <div class="modal-content bg-dark rounded">
+            <div class="modal-header text-white">
                 <h5 class="modal-title" id="cardModalLabel">New ParsedCard</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-white">
                 <form>
                     <div class="mb-3">
                         <label for="message-text" class="col-form-label">Username</label>
-                        <input type="text" required class="form-control" id="name" />
+                        <input type="text" required class="form-control text-white form-focus" id="name" />
                     </div>
 
                     <div class="mb-3">
                         <label for="message-text" class="col-form-label">Number:</label>
-                        <input type="tel" maxlength="12" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="e.g, 910-223-2341" class="form-control" id="number" />
+                        <input type="tel" maxlength="12" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="e.g, 910-223-2341" class=" text-white form-focus form-control" id="number" />
                     </div>
                     <div class="mb-3">
                         <label for="descrition-text" class="col-form-label">Description:</label>
-                        <textarea class="form-control" id="desc"></textarea>
+                        <textarea required class="form-control text-white form-focus" id="desc"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="descrition-text" class="col-form-label">More Info:</label>
-                        <textarea class="form-control" id="morei"></textarea>
+                        <textarea required class="form-control text-white form-focus" id="morei"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Post!</button>
+                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Post</button>
                     </div>
                 </form>
             </div>

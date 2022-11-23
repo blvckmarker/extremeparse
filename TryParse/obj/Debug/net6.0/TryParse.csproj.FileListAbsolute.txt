@@ -42,7 +42,6 @@ D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\TryParse.RazorAssemblyI
 D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\TryParse.RazorAssemblyInfo.cs
 D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\staticwebassets.build.json
 D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\staticwebassets.development.json
-D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\scopedcss\bundle\TryParse.styles.css
 D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\scopedcss\projectbundle\TryParse.bundle.scp.css
 D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\TryParse.dll
@@ -50,3 +49,4 @@ D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\refint\TryParse.dll
 D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\TryParse.pdb
 D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\TryParse.genruntimeconfig.cache
 D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\ref\TryParse.dll
+D:\Workzone\TryParse\try2parse\TryParse\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css

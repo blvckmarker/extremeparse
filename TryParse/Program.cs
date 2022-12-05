@@ -1,13 +1,11 @@
-using TryParse.Models;
-using TryParse.Services;
+using TryParse.Services.Extracting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<DataBaseExtractingJson>();
 builder.Services.AddScoped<DataBaseExtractingSql>();
-
+builder.Services.AddScoped<DataBaseExtractingJson>();
 
 var app = builder.Build();
 

@@ -10,3 +10,10 @@ function Diff(left, right)
    return left - right;
 }
 
+
+function onSelectRadio(name)
+{
+    let form = document.getElementById("form-radio");
+    form.action += "?type=" + name.slice(1, name.length);
+    form.submit();
+}

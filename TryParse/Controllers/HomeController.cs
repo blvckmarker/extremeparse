@@ -1,38 +1,46 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using System.Collections;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TryParse.Models;
-using TryParse.Services;
+using TryParse.Services.Extracting;
+using TryParse.Services.Updating;
 
 namespace TryParse.Controllers
 {
     public class HomeController : Controller
     {
-
+        #region Fields
         private static IEnumerable<IModel> _cards = default;
         private IDataBaseExtracting dataBase;
+        private event EventHandler observer;
 
+        private readonly SearchService searchService = new();
+        private readonly FilterService filterService = new();
+        private readonly ILogger<HomeController> _logger;
+
+        #endregion
         public IEnumerable<IModel> Cards
         {
-            get
-            {
-                GetCardModels();
-                return _cards;
-            }
+            get { return _cards; }
             set
-            {
+            { 
                 _cards = value;
+                observer.Invoke(this, new EventArgs());
             }
-        } 
-        private void GetCardModels() => _cards = dataBase.Import<CardModel>(dataBase.DbPath);
+        }
+        public HomeController(DataBaseExtractingJson dataBaseExtracting, ILogger<HomeController> logger)
+        {
+            dataBase = dataBaseExtracting;
+            _logger = logger;
+            observer += OnDataChange;
+        }
+
+        private IEnumerable<CardModel> GetCardModels() => dataBase.Import<CardModel>(dataBase.DbPath);
 
         [HttpPost]
         [Route("{controller}/api")]
-        public RedirectResult NewCard(CardModel newCard)
+        public IActionResult NewCard(CardModel newCard)
         {
+            _logger.Log(LogLevel.Information, $"[{DateTime.Now}] - created new card");
             newCard.Id = Guid.NewGuid();
             newCard.Creator = "Parssa";
             newCard.DateTime = DateTime.Now;
@@ -40,29 +48,35 @@ namespace TryParse.Controllers
             return Redirect("/");
         }
 
-        //private readonly ILogger<HomeController> _logger;
 
-        public HomeController(DataBaseExtractingJson dataBaseExtracting)
+        #region ServiceController
+        [HttpPost]
+        [Route("{controller}/api/filtercard")]
+        public IActionResult FilterReq([FromQuery] string type)
         {
-            dataBase = dataBaseExtracting;
-            //_logger = logger;
+            _cards = filterService.Update<CardModel>(type);
+            return Redirect("/");
         }
 
-        public IActionResult Index()
-        {
-            return View(Cards);
-        }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        [Route("{controller}/api/searchcard")]
+        public IActionResult SearchReq([FromQuery] string src)
         {
-            return View();
+            _cards = searchService.Update<CardModel>(src);
+            return Redirect("/");
         }
+        #endregion
+
+        private void OnDataChange(object? obj, EventArgs e) => FilterService.Models = SearchService.Models = _cards;
+        public IActionResult Index() => View(Cards);
+        public IActionResult Privacy() => View();
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, });
         }
     }
 }

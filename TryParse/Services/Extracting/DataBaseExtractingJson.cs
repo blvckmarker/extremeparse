@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json;
 using TryParse.Models;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
 
-namespace TryParse.Services
+namespace TryParse.Services.Extracting
 {
     public class DataBaseExtractingJson : IDataBaseExtracting
     {
@@ -20,7 +15,7 @@ namespace TryParse.Services
 
         public async Task Export<TModel>(TModel entity, object? options) where TModel : IModel// туда
         {
-            var cards = this.Import<TModel>(options.ToString());
+            var cards = Import<TModel>(options.ToString()); // TODO: optimize
             cards = cards.Append(entity);
             using (var JsonReader = File.OpenWrite(options.ToString()))
             {
@@ -65,21 +60,21 @@ namespace TryParse.Services
             }
         }
 
-        public IEnumerable<Model> Import<Model>(object? options) where Model : IModel // Десериализация
+        public IEnumerable<TModel> Import<TModel>(object? options) where TModel : IModel // Десериализация
         {
             using (var JsonReader = File.OpenText(options.ToString()))
             {
                 try
                 {
-                    return JsonSerializer.Deserialize<IEnumerable<Model>>(JsonReader.ReadToEnd(),
+                    return JsonSerializer.Deserialize<IEnumerable<TModel>>(JsonReader.ReadToEnd(),
                 new JsonSerializerOptions()
                 {
                     PropertyNameCaseInsensitive = true
                 });
                 }
-                catch(JsonException)
+                catch (JsonException)
                 {
-                    return Enumerable.Empty<Model>();
+                    return Enumerable.Empty<TModel>();
                 }
             }
         }

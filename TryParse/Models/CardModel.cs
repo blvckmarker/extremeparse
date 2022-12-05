@@ -1,9 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text;
-using System.Text.Json.Serialization;
-using static System.Net.WebRequestMethods;
-
-namespace TryParse.Models
+﻿namespace TryParse.Models
 {
     public class CardModel : IModel
     {

@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TryParse.Models;
+﻿using TryParse.Models;
 
-namespace TryParse.Services
+namespace TryParse.Services.Extracting
 {
     public class DataBaseExtractingSql : IDataBaseExtracting
     {
         public async Task Export<TModel>(TModel entity, object? options = null) where TModel : IModel
         {
             throw new NotImplementedException();
-        } 
+        }
 
         public async Task Export<TModel>(IEnumerable<TModel>? entity, object? options = null) where TModel : IModel
         {

@@ -26,7 +26,7 @@
 </div>
 <hr />
 <div class="container d-flex flex-wrap align-items-center justify-content-center pt-4">
-    <form class="col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+    <form method="post" action="~/Home/api/searchcard" class="col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <input type="search" class="me-5 form-control form-control" placeholder="Zzzz..." aria-label="Search">
     </form>
 
@@ -38,12 +38,15 @@
 
 <div class="form-group mt-3 row">
     <label class="text-white col-sm-1 col-form-label ms-2">Sort by <span class="ms-2 text-secondary">|</span></label>
-    <div class="col-10 my-auto">
-        <input type="radio" name="toggle-radio" id="sName" value="Name" class="form-check-input" />   <label for="sName" class="text-white ms-2 me-3">Name</label>
-        <input type="radio" name="toggle-radio" id="sDate" value="Date" class="form-check-input" />   <label for="sDate" class="text-white ms-2 me-3">Date</label>
-        <input type="radio" name="toggle-radio" id="sTB" value="Telegram-Bot" class="form-check-input" />     <label for="sTB" class="text-white ms-2 me-3">Telegram-Bot</label>
-        <input type="radio" name="toggle-radio" id="sParssa" value="Parssa" class="form-check-input " /> <label for="sParssa" class="text-white ms-2 me-3">Parssa</label>
-    </div>
+    <form method="post" id="form-radio" action="~/Home/api/filtercard">
+        <div class="col-10 ms-2">
+             <input type="radio" name="toogle-radio" id="sName" onclick="onSelectRadio(this.id)"  class="form-check-input" />   <label for="sName" class="text-white ms-2 me-3">Name</label>
+             <input type="radio" name="toogle-radio" id="sdate"  onclick="onSelectRadio(this.id)"  class="form-check-input" />   <label for="sDate" class="text-white ms-2 me-3">Date</label>
+             <input type="radio" name="toogle-radio" id="stb" onclick="onSelectRadio(this.id)"  class="form-check-input" />     <label for="sTB" class="text-white ms-2 me-3">Telegram-Bot</label>
+             <input type="radio" name="toogle-radio" id="sparssa"  onclick="onSelectRadio(this.id)" class="form-check-input " /> <label for="sParssa" class="text-white ms-2 me-3">Parssa</label>
+        </div>
+    </form>
+
 </div>
 
 <div class="min-vh-100 container pt-4 pb-4 mt-4 container-fluid border border-3 rounded bg-gray">
@@ -126,10 +129,14 @@
                     <p class="me-5 ms-5 border-end border-start border-bottom border-secondary text-secondary text-center">Created by @Identity.Creator</p>
                 </div>
                 <script>
-                        document.getElementById("year @idInc").innerText = Diff(@DateTime.Now.Year, @Identity.DateTime.Year) + " years ago"
+                    let obj = document.getElementById("year @idInc");
+                    if ( obj != null)
+                        obj.innerText = Diff(@DateTime.Now.Year, @Identity.DateTime.Year) + " years ago"
                 </script>
                 <script>
-                        document.getElementById("month @idInc").innerText = Diff(@DateTime.Now.Month, @Identity.DateTime.Month) + " month ago";
+                    let obj1 = document.getElementById("year @idInc");
+                    if (obj1 != null)
+                        obj1.innerText = Diff(@DateTime.Now.Month, @Identity.DateTime.Month) + " month ago";
                 </script>
                 ++idInc;
 

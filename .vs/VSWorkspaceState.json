@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\TryParse",
+    "\\TryParse\\Controllers",
+    "\\TryParse\\Models",
+    "\\TryParse\\Properties",
+    "\\TryParse\\Services",
+    "\\TryParse\\Services\\Extracting",
+    "\\TryParse\\Services\\Updating",
+    "\\TryParse\\Views"
+  ],
+  "SelectedNode": "\\TryParse.sln",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,13 +1,13 @@
 ﻿@using TryParse.Models;
 @model IEnumerable<IModel>
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "User";
     int idInc = default;
 }
 
 
 
-<div class="container border bordercolor bg-gradient ">
+<div class="container border bordercolor bg-dark bg-opacity-25">
     <p class="my-2 mx-2 fw-gradient mb-me-auto " style="font-size: 20px; font-weight:500;">Description</p>
     <ul class="text-justify">
         <li>
@@ -22,12 +22,12 @@
                 the result may contain <span class="text-decoration-underline">little or no information</span> <strong>freely available on the Internet.</strong>
             </p>
         </li>
-    </ul>
+    </ul> 
 </div>
 <hr />
 <div class="container d-flex flex-wrap align-items-center justify-content-center pt-4">
-    <form method="post" action="~/Home/api/searchcard" class="col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <input type="search" class="me-5 form-control form-control" placeholder="Zzzz..." aria-label="Search">
+    <form method="post" action="~/User/api/searchcard" id="srchform" class="row mb-2 me-lg-auto mb-md-0">
+        <input type="search" onsearch="onSearch()" class="col-sm form-control" name="src" id="srchitem" placeholder="Find your flame..." aria-label="Search">
     </form>
 
     <div class="col-12 col-lg-auto mb-3 mb-lg-0 ">
@@ -38,15 +38,19 @@
 
 <div class="form-group mt-3 row">
     <label class="text-white col-sm-1 col-form-label ms-2">Sort by <span class="ms-2 text-secondary">|</span></label>
-    <form method="post" id="form-radio" action="~/Home/api/filtercard">
+    <form method="post" id="form-radio" action="~/User/api/filtercard">
         <div class="col-10 ms-2">
              <input type="radio" name="toogle-radio" id="sName" onclick="onSelectRadio(this.id)"  class="form-check-input" />   <label for="sName" class="text-white ms-2 me-3">Name</label>
-             <input type="radio" name="toogle-radio" id="sdate"  onclick="onSelectRadio(this.id)"  class="form-check-input" />   <label for="sDate" class="text-white ms-2 me-3">Date</label>
-             <input type="radio" name="toogle-radio" id="stb" onclick="onSelectRadio(this.id)"  class="form-check-input" />     <label for="sTB" class="text-white ms-2 me-3">Telegram-Bot</label>
-             <input type="radio" name="toogle-radio" id="sparssa"  onclick="onSelectRadio(this.id)" class="form-check-input " /> <label for="sParssa" class="text-white ms-2 me-3">Parssa</label>
+             <input type="radio" name="toogle-radio" id="sTb" onclick="onSelectRadio(this.id)"  class="form-check-input" />     <label for="sTB" class="text-white ms-2 me-3">Telegram-Bot</label>
+             <input type="radio" name="toogle-radio" id="sParssa"  onclick="onSelectRadio(this.id)" class="form-check-input " /> <label for="sParssa" class="text-white ms-2 me-3">Parssa</label>
+             <a href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi mb-1 bi-arrow-repeat" viewBox="0 0 16 16">
+                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                    <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                </svg>
+             </a>
         </div>
     </form>
-
 </div>
 
 <div class="min-vh-100 container pt-4 pb-4 mt-4 container-fluid border border-3 rounded bg-gray">
@@ -88,9 +92,9 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="card-text">
-                                            <p class="wht-text"><strong>Номерок</strong>: @Identity.Number</p>
-                                            <p class="wht-text"><strong>Описание</strong>: @Identity.Description </p>
-                                            <p class="wht-text"><strong>Доп.инфа</strong>: @Identity.Info </p>
+                                            <p class="wht-text"><strong>Phone</strong>: @Identity.Number</p>
+                                            <p class="wht-text"><strong>Description</strong>: @Identity.Description </p>
+                                            <p class="wht-text"><strong>More information</strong>: @Identity.Info </p>
 
                                         </div>
 
@@ -154,7 +158,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-white">
-                <form method="post" action="~/Home/api">
+                <form method="post" action="~/User/api">
                     <div class="mb-3">
                         <label for="message-text" class="col-form-label">Username</label>
                         <input type="text" required class="form-control text-white form-focus" name="Name" id="name" />

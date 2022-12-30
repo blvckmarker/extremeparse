@@ -10,6 +10,12 @@ function Diff(left, right)
    return left - right;
 }
 
+function onSearch() {
+    let form = document.getElementById("srchform");
+    let value = document.getElementById("srchitem").value;
+    form.action += "?src=" + value;
+    form.submit();
+}
 
 function onSelectRadio(name)
 {

@@ -5,15 +5,7 @@ namespace TryParse.Services.Extracting
 {
     public class DataBaseExtractingJson : IDataBaseExtracting
     {
-        private IWebHostEnvironment webHost;
-
-
-        public DataBaseExtractingJson(IWebHostEnvironment webHost)
-        {
-            this.webHost = webHost;
-        }
-
-        public async Task Export<TModel>(TModel entity, object? options) where TModel : IModel// туда
+        public async Task Export<TModel>(TModel entity, object? options) where TModel : IModel
         {
             var cards = Import<TModel>(options.ToString()); // TODO: optimize
             cards = cards.Append(entity);
@@ -37,12 +29,12 @@ namespace TryParse.Services.Extracting
         {
             get
             {
-                return Path.Combine(webHost.WebRootPath, "date", "cardDate.json");
+                return Path.Combine("wwwroot", "date", "cardDate.json");
             }
         }
 
 
-        public async Task Export<TModel>(IEnumerable<TModel>? entity, object? options) where TModel : IModel// Сериализация
+        public async Task Export<TModel>(IEnumerable<TModel>? entity, object? options) where TModel : IModel
         {
             using (var JsonReader = File.OpenWrite((options as Settings).path))
             {
@@ -60,7 +52,7 @@ namespace TryParse.Services.Extracting
             }
         }
 
-        public IEnumerable<TModel> Import<TModel>(object? options) where TModel : IModel // Десериализация
+        public IEnumerable<TModel> Import<TModel>(object? options) where TModel : IModel
         {
             using (var JsonReader = File.OpenText(options.ToString()))
             {

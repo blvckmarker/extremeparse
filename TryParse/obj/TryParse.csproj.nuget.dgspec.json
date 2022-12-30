@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jesus\\Source\\Repos\\blvckmarker\\try2parse\\TryParse\\TryParse.csproj": {}
+    "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse\\TryParse\\TryParse.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jesus\\Source\\Repos\\blvckmarker\\try2parse\\TryParse\\TryParse.csproj": {
+    "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse\\TryParse\\TryParse.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jesus\\Source\\Repos\\blvckmarker\\try2parse\\TryParse\\TryParse.csproj",
+        "projectUniqueName": "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse\\TryParse\\TryParse.csproj",
         "projectName": "TryParse",
-        "projectPath": "C:\\Users\\Jesus\\Source\\Repos\\blvckmarker\\try2parse\\TryParse\\TryParse.csproj",
+        "projectPath": "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse\\TryParse\\TryParse.csproj",
         "packagesPath": "C:\\Users\\Jesus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jesus\\Source\\Repos\\blvckmarker\\try2parse\\TryParse\\obj\\",
+        "outputPath": "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse\\TryParse\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Visual Studio\\Shared\\NuGetPackages"
@@ -43,6 +43,12 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

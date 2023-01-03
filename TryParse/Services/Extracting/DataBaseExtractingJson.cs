@@ -27,10 +27,7 @@ namespace TryParse.Services.Extracting
 
         public string DbPath
         {
-            get
-            {
-                return Path.Combine("wwwroot", "date", "cardDate.json");
-            }
+            get => Path.Combine("wwwroot", "date", "cardDate.json");
         }
 
 

@@ -18,7 +18,7 @@ html {
     body {
         margin-bottom: 60px;
         background: url("../img/wallpaper.png");
-        background-attachment: fixed;
+        background-attachment:scroll ;
     }
 }
 

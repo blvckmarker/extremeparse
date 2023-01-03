@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TryParse.Models;
 
-namespace TryParse.ModelContext
+namespace TryParse.Models.Context
 {
     public class ModelContext : DbContext
     {

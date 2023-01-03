@@ -20,10 +20,21 @@
         }
     </style>
 
-    <header class="p-3 text-dark bg-dark overflow-hidden">
+    <header class="p-3 text-dark bg-dark">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <span id="label" class="display-4 fs-1 mx-auto text-white-50 border border-secondary">ExtremeParse</span>
+
+                <form method="post" action="~/User/api/searchcard" id="srchform" class="row mx-auto">
+                    <input type="search" onsearch="onSearch()" style="background: inherit !important;" class="col-sm text-white-50 pe-5 form-control" name="src" id="srchitem" placeholder="Find your flame..." aria-label="Search">
+                    <a href="~/" class="col-1 my-auto mx-auto text-white-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                        </svg>
+                    </a>
+                </form>
+
                 <ul id="fcknav" class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0 position-static top-0 end-0">
                     <li><strong><a href="~/" class="nav-link px-3 hoverable text-secondary">Home</a></strong></li>
                     <li><strong><a href="~/Home/Privacy" class="nav-link hoverable px-3 text-white">Privacy</a></strong></li>
@@ -76,7 +87,7 @@
             </svg>
 
             <ul class="nav col-md-4 justify-content-end me-3">
-                <li class="nav-item"><a href="~/" class="ms-3 nav-link px-2 hoverable text-muted">Home</a></li>
+                <li class="nav-item"><a href="~/" class="ms-3 nav-link px-2 hoverable text-muted">Main</a></li>
                 <li class="nav-item"><a href="~/Home/Privacy" class="ms-3 nav-link px-2 hoverable text-muted">Privacy</a></li>
                 <li class="nav-item"><a data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" class="ms-3 nav-link hoverable px-2 text-muted">About</a></li>
             </ul>

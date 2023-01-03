@@ -23,3 +23,8 @@ function onSelectRadio(name)
     form.action += "?type=" + name.slice(1, name.length);
     form.submit();
 }
+
+
+function kkk(id)
+{
+}

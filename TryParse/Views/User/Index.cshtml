@@ -1,7 +1,7 @@
 ﻿@using TryParse.Models;
 @model IEnumerable<IModel>
 @{
-    ViewData["Title"] = "User";
+    ViewData["Title"] = "Main";
     int idInc = default;
 }
 
@@ -26,10 +26,6 @@
 </div>
 <hr />
 <div class="container d-flex flex-wrap align-items-center justify-content-center pt-4">
-    <form method="post" action="~/User/api/searchcard" id="srchform" class="row mb-2 me-lg-auto mb-md-0">
-        <input type="search" onsearch="onSearch()" class="col-sm form-control" name="src" id="srchitem" placeholder="Find your flame..." aria-label="Search">
-    </form>
-
     <div class="col-12 col-lg-auto mb-3 mb-lg-0 ">
         <button type="button" data-bs-toggle="modal" data-bs-target="#cardModal" class="my-1 btn btn-outline-danger">Create a new Parsed-Card</button>
         <a href="https://t.me/MagmaLord14"><button type="button" class="my-1 btn btn-purple ">Create with our Telegram-Bot</button></a>
@@ -95,53 +91,15 @@
                                             <p class="wht-text"><strong>Phone</strong>: @Identity.Number</p>
                                             <p class="wht-text"><strong>Description</strong>: @Identity.Description </p>
                                             <p class="wht-text"><strong>More information</strong>: @Identity.Info </p>
-
                                         </div>
-
-                                    </div>
-                                    <div class="card-footer text-muted text-center">
-
-                                        @if ((365 * DateTime.Now.Year + DateTime.Now.DayOfYear) - (365 * Identity.DateTime.Year + Identity.DateTime.DayOfYear) <= 30)
-                                        {
-                                            @if (DateTime.Now.DayOfYear - Identity.DateTime.DayOfYear > 1)
-                                            {
-                                                <text>@Identity.DateTime.Day days ago</text>
-                                            }
-                                            else if (DateTime.Now.DayOfYear - Identity.DateTime.DayOfYear == 1)
-                                            {
-                                                <text>Yesterday</text>
-                                            }
-                                            else if ((365 * DateTime.Now.Year + DateTime.Now.DayOfYear) - (365 * Identity.DateTime.Year + Identity.DateTime.DayOfYear) == 0)
-                                            {
-                                                <text>Today</text>
-                                            }
-                                        }
-                                        else if ((365 * DateTime.Now.Year + DateTime.Now.DayOfYear) - (365 * Identity.DateTime.Year + Identity.DateTime.DayOfYear) is (>30 and <=365))
-                                        {
-                                            <span id="month @idInc"></span>
-                                        }
-                                        else if ((365 * DateTime.Now.Year + DateTime.Now.DayOfYear) - (365 * Identity.DateTime.Year + Identity.DateTime.DayOfYear) > 365)
-                                        {
-                                            <span id="year @idInc"></span>
-                                        }
+                                        <hr>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <p class="me-5 ms-5 border-end border-start border-bottom border-secondary text-secondary text-center">Created by @Identity.Creator</p>
                 </div>
-                <script>
-                    let obj = document.getElementById("year @idInc");
-                    if ( obj != null)
-                        obj.innerText = Diff(@DateTime.Now.Year, @Identity.DateTime.Year) + " years ago"
-                </script>
-                <script>
-                    let obj1 = document.getElementById("year @idInc");
-                    if (obj1 != null)
-                        obj1.innerText = Diff(@DateTime.Now.Month, @Identity.DateTime.Month) + " month ago";
-                </script>
                 ++idInc;
 
             }

@@ -20,11 +20,8 @@ namespace TryParse.Controllers
         private readonly FilterService filterService = new();
         private readonly ILogger<UserController> _logger;
 
-
-        public UserController()
-        {
-            OnCardModelChanged += OnDataChange;
-        }
+        private IEnumerable<IModel> GetCardsModel() => dataBaseSql.Import<CardModel>(dataBaseJson.DbPath);
+        public UserController() => OnCardModelChanged += OnDataChange;
 
         #endregion
         public IEnumerable<IModel> Cards
@@ -37,8 +34,6 @@ namespace TryParse.Controllers
             }
         }
 
-        private IEnumerable<IModel> GetCardsModel() => dataBaseJson.Import<CardModel>(dataBaseJson.DbPath);
-
         [HttpPost]
         [Route("{controller}/api")]
         public IActionResult NewCard(CardModel newCard)
@@ -49,12 +44,9 @@ namespace TryParse.Controllers
             newCard.Creator = "Parssa";
             newCard.DateTime = DateTime.Now;
 
-            dataBaseJson.Export<CardModel>(newCard, dataBaseJson.DbPath);
-            Cards = GetCardsModel();
-
+            dataBaseSql.Export<CardModel>(newCard);
             return RedirectToAction("Index");
         }
-
 
         #region ServiceController
         [HttpPost]
@@ -80,7 +72,6 @@ namespace TryParse.Controllers
         }
 
         public IActionResult Privacy() => View();
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

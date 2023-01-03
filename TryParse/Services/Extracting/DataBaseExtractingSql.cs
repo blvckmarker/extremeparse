@@ -1,22 +1,33 @@
 ﻿using TryParse.Models;
+using TryParse.Models.Context;
 
 namespace TryParse.Services.Extracting
 {
     public class DataBaseExtractingSql : IDataBaseExtracting
     {
+        private readonly ModelContext db = new();
         public async Task Export<TModel>(TModel entity, object? options = null) where TModel : IModel
         {
-            throw new NotImplementedException();
+            await db.Models.AddAsync(entity as CardModel);
+            db.SaveChanges();
         }
 
         public async Task Export<TModel>(IEnumerable<TModel>? entity, object? options = null) where TModel : IModel
         {
-            throw new NotImplementedException();
+            try
+            {
+                foreach (var item in entity)
+                    await db.Models.AddAsync(item as CardModel);
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync(ex.Message);
+            }
+            db.SaveChanges();
         }
-        public IEnumerable<Model> Import<Model>(object? options) where Model : IModel
-        {
-            throw new NotImplementedException();
-        }
+
+        public IEnumerable<TModel> Import<TModel>(object? options) where TModel : IModel => db.Models as IEnumerable<TModel>;
+
 
         public string DbPath
         {
@@ -27,3 +38,4 @@ namespace TryParse.Services.Extracting
         }
     }
 }
+

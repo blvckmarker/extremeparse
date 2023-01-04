@@ -3286,9 +3286,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse\\TryParse\\TryParse.csproj",
-      "projectName": "TryParse",
-      "projectPath": "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse\\TryParse\\TryParse.csproj",
+      "projectUniqueName": "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse\\TryParse\\ExtremeParse.Site.Client.csproj",
+      "projectName": "ExtremeParse.Site.Client",
+      "projectPath": "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse\\TryParse\\ExtremeParse.Site.Client.csproj",
       "packagesPath": "C:\\Users\\Jesus\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse\\TryParse\\obj\\",
       "projectStyle": "PackageReference",

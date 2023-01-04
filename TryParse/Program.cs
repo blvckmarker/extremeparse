@@ -3,8 +3,8 @@ using TryParse.Services.Extracting;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddSingleton<IDataBaseExtracting, DataBaseExtractingJson>();
-builder.Services.AddSingleton<IDataBaseExtracting, DataBaseExtractingSql>();
+builder.Services.AddSingleton<DataBaseExtractingJson>();
+builder.Services.AddSingleton<DataBaseExtractingSql>();
 
 builder.Services.AddMvc();
 

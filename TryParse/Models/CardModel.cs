@@ -39,6 +39,5 @@
         }
 
         public string Creator { get; set; }
-
     }
 }

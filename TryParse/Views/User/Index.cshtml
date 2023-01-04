@@ -25,20 +25,30 @@
     </ul> 
 </div>
 <hr />
-<div class="container d-flex flex-wrap align-items-center justify-content-center pt-4">
-    <div class="col-12 col-lg-auto mb-3 mb-lg-0 ">
+<div class="container d-flex row flex-wrap align-items-center justify-content-center pt-4">
+     <form method="post" action="~/User/api/searchcard" id="srchform" class="col-lg-3 me-lg-auto  justify-content-center">
+         <input type="search" onsearch="onSearch()" style="background: inherit !important;" class="text-white-50 form-control" name="src" id="srchitem" placeholder="Find your flame..." aria-label="Search">
+     </form>
+     <a href="~/" class="col-sm my-auto mb-2 text-white-50">
+         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+             <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+             <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+         </svg>
+     </a>
+    <div class="col-12 col-lg-auto mb-3 mb-lg-0">
         <button type="button" data-bs-toggle="modal" data-bs-target="#cardModal" class="my-1 btn btn-outline-danger">Create a new Parsed-Card</button>
         <a href="https://t.me/MagmaLord14"><button type="button" class="my-1 btn btn-purple ">Create with our Telegram-Bot</button></a>
     </div>
 </div>
 
 <div class="form-group mt-3 row">
-    <label class="text-white col-sm-1 col-form-label ms-2">Sort by <span class="ms-2 text-secondary">|</span></label>
+    <label class="text-white col-lg-auto me-lg-auto col-form-label ms-2 font-monospace" >Sort by <span class="text-secondary" style="font-size:large">|</span></label>
     <form method="post" id="form-radio" action="~/User/api/filtercard">
-        <div class="col-10 ms-2">
+        <div class="col-10 col-lg-auto ms-2">
              <input type="radio" name="toogle-radio" id="sName" onclick="onSelectRadio(this.id)"  class="form-check-input" />   <label for="sName" class="text-white ms-2 me-3">Name</label>
              <input type="radio" name="toogle-radio" id="sTb" onclick="onSelectRadio(this.id)"  class="form-check-input" />     <label for="sTB" class="text-white ms-2 me-3">Telegram-Bot</label>
              <input type="radio" name="toogle-radio" id="sParssa"  onclick="onSelectRadio(this.id)" class="form-check-input " /> <label for="sParssa" class="text-white ms-2 me-3">Parssa</label>
+             <input type="radio" name="toogle-radio" id="sDate"  onclick="onSelectRadio(this.id)" class="form-check-input " /> <label for="sDate" class="text-white ms-2 me-3">Date</label>
              <a href="/">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi mb-1 bi-arrow-repeat" viewBox="0 0 16 16">
                     <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
@@ -93,6 +103,7 @@
                                             <p class="wht-text"><strong>More information</strong>: @Identity.Info </p>
                                         </div>
                                         <hr>
+                                        <button type="button" onclick="onRem(@idInc)" value="@Identity.Id" id="rm-item-@idInc" class="btn btn-outline-danger">Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -103,10 +114,12 @@
                 ++idInc;
 
             }
+
         </div>
     </div>
 
 </div>
+
 
 <div id="cardModal" class="modal fade" aria-hidden="true" aria-labelledby="cardModalLabel" tabindex="-1">
     <div class="modal-dialog ">
@@ -150,3 +163,5 @@
         
     </div>
 </div>
+
+<form action="~/User/api/rm" id="rm-action" method="post"/> 

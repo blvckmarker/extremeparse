@@ -25,6 +25,10 @@ function onSelectRadio(name)
 }
 
 
-function kkk(id)
+function onRem(id)
 {
+    let form = document.getElementById("rm-action");
+    let item = document.getElementById("rm-item-" + id).value;
+    form.action += "?guid=" + item;
+    form.submit();
 }

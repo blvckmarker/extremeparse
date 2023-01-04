@@ -123,6 +123,20 @@ body {
     color: rgba(255,255,255, 0.8);
 }
 
+@keyframes kekframes {
+    0% {
+        color: inherit;
+    }
+
+    50% {
+        color: red;
+    }
+}
+
+.kek{
+    animation: kekframes 3s infinite;
+}
+
 .form-focus{
     background-color: rgb(128, 128, 128, 0.1)!important;
 }

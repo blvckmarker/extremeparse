@@ -11,8 +11,9 @@ namespace TryParse.Services.Updating
             models.OrderBy(model => request switch
             {
                 "Name" => model.Name,
-                "Tg" => (model.Creator == "Telegram-Bot").ToString(),
-                "Parssa" => (model.Creator == "Parssa").ToString(),
+                "Parssa" => model.Creator,
+                "Tb" => model.Creator == "Telegram-Bot" ? "Parssa" : "Telegram-Bot",
+                "Date" => (-model.DateTime.Ticks).ToString(),
                 _ => null
             }).ToList();
     }

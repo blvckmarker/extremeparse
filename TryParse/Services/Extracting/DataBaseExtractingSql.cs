@@ -1,4 +1,6 @@
-﻿using TryParse.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TryParse.Controllers;
+using TryParse.Models;
 using TryParse.Models.Context;
 
 namespace TryParse.Services.Extracting
@@ -6,11 +8,28 @@ namespace TryParse.Services.Extracting
     public class DataBaseExtractingSql : IDataBaseExtracting
     {
         private readonly ModelContext db = new();
+        private readonly ILogger logger;
+
         public async Task Export<TModel>(TModel entity, object? options = null) where TModel : IModel
         {
-            await db.Models.AddAsync(entity as CardModel);
+            logger.LogInformation($"[Sql] Record a new entity | GUID : {entity.Id}");
+            try
+            {
+                await db.Models.AddAsync(entity as CardModel);
+            }
+            catch (OperationCanceledException exc)
+            {
+                logger?.LogWarning(exc.Message);
+            }
             db.SaveChanges();
         }
+
+        public DataBaseExtractingSql(ILogger<UserController> logger)
+        {
+            this.logger = logger;
+            logger.LogInformation($"[Sql] Create service - {this.GetHashCode()}");
+        }
+
 
         public async Task Export<TModel>(IEnumerable<TModel>? entity, object? options = null) where TModel : IModel
         {
@@ -19,15 +38,22 @@ namespace TryParse.Services.Extracting
                 foreach (var item in entity)
                     await db.Models.AddAsync(item as CardModel);
             }
-            catch (Exception ex)
+            catch (OperationCanceledException ex)
             {
-                await Console.Out.WriteLineAsync(ex.Message);
+                logger?.LogWarning($"[Sql] {ex.Message}");
             }
             db.SaveChanges();
         }
 
         public IEnumerable<TModel> Import<TModel>(object? options) where TModel : IModel => db.Models as IEnumerable<TModel>;
 
+        public async Task Remove<TModel>(string guid) where TModel : IModel
+        {
+            logger.LogInformation($"[Sql] Remove entity | GUID : {guid}");
+            var Card = await db.Models.FirstOrDefaultAsync(item => item.Id.ToString() == guid);
+            db.Models.Remove(Card);
+            db.SaveChanges();
+        }
 
         public string DbPath
         {

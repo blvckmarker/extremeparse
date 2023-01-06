@@ -14,7 +14,6 @@ namespace TryParse.Controllers
         private IDataBaseExtracting dataBaseJson;
         private IDataBaseExtracting dataBaseSql;
         private event EventHandler OnCardModelChanged;
-        private static int order = 0;
 
         private readonly SearchService searchService = new();
         private readonly FilterService filterService = new();
@@ -44,9 +43,6 @@ namespace TryParse.Controllers
             }
         }
 
-        //{fa042b12-4053-4947-900a-ebdb275f0dcc} 1
-        //{c3ff6af9-c91a-40e9-9ea7-7ab56f277357} 2
-
         [HttpPost]
         [Route("{controller}/api")]
         public IActionResult NewCard(CardModel newCard)
@@ -57,7 +53,6 @@ namespace TryParse.Controllers
             newCard.Creator = "Telegram-Bot";
             newCard.DateTime = DateTime.Now;
 
-            order++;
             dataBaseSql.Export<CardModel>(newCard);
             return RedirectToAction("Index");
         }

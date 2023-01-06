@@ -10,7 +10,7 @@ namespace ExtremeParse.Bot.Client.Commands
 
         public async Task ExecuteAsync(ITelegramBotClient botClient, ChatId chatid, string args)
         {
-            await botClient.SendTextMessageAsync(chatid, $"Че сука а {args}");
+            throw new NotImplementedException();
         }
     }
 }

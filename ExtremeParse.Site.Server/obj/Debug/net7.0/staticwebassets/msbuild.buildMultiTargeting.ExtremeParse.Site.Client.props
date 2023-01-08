@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ExtremeParse.Site.Client.props" />
+</Project>

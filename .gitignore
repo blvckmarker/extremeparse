@@ -13,7 +13,7 @@
 
 .claudiaideconfig
 ExtremeParse.Site.Server/
-.ExtremeParse.sln
+ExtremeParse.sln
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

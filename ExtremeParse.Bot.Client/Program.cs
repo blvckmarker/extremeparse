@@ -46,7 +46,6 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
             UpdateType.Message => MessageHandlerAsync(botClient, chatid, update.Message),
             _ => ExceptionTypeHandlerAsync(botClient, chatid, update.Type)
         });
-
     }
     catch (Exception ex)
     {

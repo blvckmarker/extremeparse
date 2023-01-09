@@ -5,6 +5,12 @@
       "environmentVariables": {
         "TOKEN": "5900321636:AAGOahXezGhzmvziGqV2vYDydN3agMPJ0sI"
       }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "environmentVariables": {
+        "TOKEN": "5900321636:AAGOahXezGhzmvziGqV2vYDydN3agMPJ0sI"
+      }
     }
   }
 }

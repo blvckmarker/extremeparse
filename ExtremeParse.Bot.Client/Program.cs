@@ -62,8 +62,7 @@ async Task MessageHandlerAsync(ITelegramBotClient botClient, ChatId id, Message 
     };
 
     var msg = message.Text.Split(' ');
-    if (msg is not [var commandName, ..])
-        return;
+    var commandName = msg.First();
 
     try
     {

@@ -14,10 +14,10 @@ var token = Environment.GetEnvironmentVariable("TOKEN")!;
 using var cts = new CancellationTokenSource();
 
 
-var files = Directory.GetFiles($"{currentDirectory}/Articles", "*.html");
+var files = Directory.GetFiles($"./Articles", "*.html");
 var articles = files.Select(file => new Article(
     Name: Path.GetFileNameWithoutExtension(file),
-    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{currentDirectory}/Articles/{file.Split("/")[^1]}"))
+    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"./Articles/{file.Split("/")[^1]}"))
     {
         ParseMode = ParseMode.Html
     })).ToList();

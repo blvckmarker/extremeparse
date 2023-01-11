@@ -15,6 +15,7 @@ FROM build AS publish
 RUN dotnet publish "ExtremeParse.Bot.Client.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
+EXPOSE 80
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "ExtremeParse.Bot.Client.dll"]

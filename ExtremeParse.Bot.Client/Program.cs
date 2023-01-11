@@ -1,11 +1,10 @@
 ﻿using ExtremeParse.Bot.Client.Commands;
-using System.Reflection;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 
-var env = Environment.CurrentDirectory + '/' + Assembly.GetExecutingAssembly().GetName().Name;
+var env = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent;
 
 #if DEBUG
 //currentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
@@ -15,10 +14,10 @@ var token = Environment.GetEnvironmentVariable("TOKEN")!;
 using var cts = new CancellationTokenSource();
 
 
-var files = Directory.GetFiles($"{env}/Articles", "*.html");
+var files = Directory.GetFiles($"{env}\\Articles", "*.html");
 var articles = files.Select(file => new Article(
     Name: Path.GetFileNameWithoutExtension(file),
-    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{env}/Articles/{file.Split("/")[^1]}"))
+    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{env}/Articles/{file.Split("\\")[^1]}"))
     {
         ParseMode = ParseMode.Html
     })).ToList();

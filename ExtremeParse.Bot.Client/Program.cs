@@ -4,11 +4,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 
-var env = Path.GetFullPath(Environment.CurrentDirectory);
-var enc = Directory.GetDirectories(env);
-
-foreach (var encPath in enc)
-    Console.WriteLine(encPath);
+var env = Environment.CurrentDirectory + "/ExtremeParse.Bot.Client";
 
 #if DEBUG
 //currentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;

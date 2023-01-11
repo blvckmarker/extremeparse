@@ -8,6 +8,6 @@ namespace ExtremeParse.Bot.Client.Commands
         public string CommandName { get; }
         public string CommandDescription { get; }
 
-        public Task ExecuteAsync(ITelegramBotClient botClient, ChatId chatid, string args);
+        public Task<Message> ExecuteAsync(ITelegramBotClient botClient, ChatId chatid, string args, CancellationToken? ctsToken = null);
     }
 }

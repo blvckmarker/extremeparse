@@ -3,13 +3,13 @@
     "ExtremeParse.Bot.Client": {
       "commandName": "Project",
       "environmentVariables": {
-        "TOKEN": "5900321636:AAGOahXezGhzmvziGqV2vYDydN3agMPJ0sI"
+        "TOKEN": "5713291587:AAH8ZsQlvaGDJEwZxDmpqQ186pi76nWHUOM"
       }
     },
     "Docker": {
       "commandName": "Docker",
       "environmentVariables": {
-        "TOKEN": "5900321636:AAGOahXezGhzmvziGqV2vYDydN3agMPJ0sI"
+        "TOKEN": "5713291587:AAH8ZsQlvaGDJEwZxDmpqQ186pi76nWHUOM"
       }
     }
   }

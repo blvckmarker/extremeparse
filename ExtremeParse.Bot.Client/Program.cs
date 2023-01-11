@@ -1,11 +1,11 @@
 ﻿using ExtremeParse.Bot.Client.Commands;
-using System.Reflection;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 
-var env = Environment.CurrentDirectory + '/' + Assembly.GetExecutingAssembly().GetName().Name;
+var env = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent;
+//Environment.CurrentDirectory + '/' + Assembly.GetExecutingAssembly().GetName().Name;
 
 #if DEBUG
 //currentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
@@ -17,25 +17,17 @@ using var cts = new CancellationTokenSource();
 
 
 
+var files = Directory.GetFiles($"{env}\\Articles", "*.html");
+var articles = files.Select(file => new Article(
+    Name: Path.GetFileNameWithoutExtension(file),
+    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{env}/Articles/{file.Split("\\")[^1]}"))
+    {
+        ParseMode = ParseMode.Html
+    })).ToList();
 
-//var files = Directory.GetFiles($"{env}/Articles", "*.html");
-//var articles = files.Select(file => new Article(
-//    Name: Path.GetFileNameWithoutExtension(file),
-//    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{env}/Articles/{file.Split("/")[^1]}"))
-//    {
-//        ParseMode = ParseMode.Html
-//    })).ToList();
-
-//articles.ForEach(Console.WriteLine);
 
 
 var bot = new TelegramBotClient(token);
-await bot.SetWebhookAsync("https://railway.app/project/87ab2b90-a530-4ea3-8844-cde8ba51cdf4/service/fb253fde-7f41-4e7e-9ab2-fe2779684846?id=13b40d98-8d89-42bb-9459-f8576a773fc7");
-var resp = await bot.GetWebhookInfoAsync();
-Console.WriteLine($"{resp.LastErrorMessage} | {resp.LastErrorDate}");
-
-
-
 bot.StartReceiving(
     updateHandler: HandleUpdateAsync,
     pollingErrorHandler: PollingErrorHandler,
@@ -52,12 +44,11 @@ cts.Cancel();
 async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken token)
 {
     var chatid = update.Message.Chat.Id;
-    await Console.Out.WriteLineAsync("Handle Update Async now!");
     try
     {
         await (update.Type switch
         {
-            UpdateType.Message => MessageHandlerAsync(botClient, chatid, update.Message),
+            UpdateType.Message => MessageHandlerAsync(botClient, chatid, update.Message, token),
             _ => ExceptionTypeHandlerAsync(botClient, chatid, update.Type)
         });
     }
@@ -67,14 +58,13 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
     }
 }
 
-async Task MessageHandlerAsync(ITelegramBotClient botClient, ChatId id, Message message)
+async Task MessageHandlerAsync(ITelegramBotClient botClient, ChatId id, Message message, CancellationToken? cts = null)
 {
     var Commands = new List<IBotCommand>()
     {
         new FindByPhone(),
-        new FindByName()
+        new FindByPage()
     };
-    Console.WriteLine("Now iam Message Handler");
 
     var msg = message.Text.Split(' ');
     var commandName = msg.First();
@@ -89,13 +79,13 @@ async Task MessageHandlerAsync(ITelegramBotClient botClient, ChatId id, Message 
 
     await Commands.
         FirstOrDefault(command => command.CommandName == commandName)!.
-        ExecuteAsync(botClient, id, string.Join(' ', msg[1..]));
+        ExecuteAsync(botClient, id, string.Join(' ', msg[1..]), cts);
 }
 
 async Task ExceptionTypeHandlerAsync(ITelegramBotClient bot, ChatId chatId, UpdateType? updateType = null) =>
     await bot.SendTextMessageAsync(
         chatId: chatId,
-        text: "halo" /*articles.First(article => article.Name == "ExceptionType").Value.MessageText + $"\nTypeError: {updateType}"*/);
+        text: articles.First(article => article.Name == "ExceptionType").Value.MessageText + $"\nTypeError: {updateType}");
 
 
 Task PollingErrorHandler(ITelegramBotClient bot, Exception ex, CancellationToken ct)

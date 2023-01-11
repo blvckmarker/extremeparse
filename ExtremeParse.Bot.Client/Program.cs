@@ -1,10 +1,11 @@
 ﻿using ExtremeParse.Bot.Client.Commands;
+using System.Reflection;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 
-var env = Environment.CurrentDirectory + "/ExtremeParse.Bot.Client";
+var env = Environment.CurrentDirectory + '/' + Assembly.GetExecutingAssembly().GetName().Name;
 
 #if DEBUG
 //currentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
@@ -14,10 +15,10 @@ var token = Environment.GetEnvironmentVariable("TOKEN")!;
 using var cts = new CancellationTokenSource();
 
 
-var files = Directory.GetFiles($"{env}/Articles", "*.html");
+var files = Directory.GetFiles($"./Articles", "*.html");
 var articles = files.Select(file => new Article(
     Name: Path.GetFileNameWithoutExtension(file),
-    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{env}/Articles/{file.Split("/")[^1]}"))
+    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"./Articles/{file.Split("/")[^1]}"))
     {
         ParseMode = ParseMode.Html
     })).ToList();
@@ -31,7 +32,7 @@ bot.StartReceiving(
 
 
 var me = await bot.GetMeAsync();
-Console.WriteLine($"{me.Username} start receiving");
+Console.WriteLine($"@{me.Username} start receiving");
 
 Console.ReadLine();
 cts.Cancel();
@@ -64,20 +65,17 @@ async Task MessageHandlerAsync(ITelegramBotClient botClient, ChatId id, Message 
     var msg = message.Text.Split(' ');
     var commandName = msg.First();
 
-    try
+    if (!new[] { Commands[0].CommandName, Commands[1].CommandName }.Contains(commandName))
     {
-        await Commands.
-                 FirstOrDefault(command => command.CommandName == commandName).
-                 ExecuteAsync(botClient, id, string.Join(' ', msg[1..]));
-    }
-    catch (Exception e)
-    {
-        await Console.Out.WriteLineAsync($"{{Error}} [ChatId: {id}, @{id.Username}] - {e.Message}");
         await botClient.SendTextMessageAsync(id,
             $"Ooops!\nSomething went wrong. Maybe I don't know <code>{commandName}</code> command!", //To article
             parseMode: ParseMode.Html);
-
+        return;
     }
+
+    await Commands.
+        FirstOrDefault(command => command.CommandName == commandName)!.
+        ExecuteAsync(botClient, id, string.Join(' ', msg[1..]));
 }
 
 async Task ExceptionTypeHandlerAsync(ITelegramBotClient bot, ChatId chatId, UpdateType? updateType = null) =>

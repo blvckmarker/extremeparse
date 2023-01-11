@@ -5,7 +5,10 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 
 var currentDirectory = Directory.GetCurrentDirectory();
+var env = Environment.CurrentDirectory;
 
+Console.WriteLine(currentDirectory);
+Console.WriteLine(env);
 #if DEBUG
 //currentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
 #endif

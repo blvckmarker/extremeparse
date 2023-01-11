@@ -23,6 +23,9 @@ var articles = files.Select(file => new Article(
         ParseMode = ParseMode.Html
     })).ToList();
 
+articles.ForEach(Console.WriteLine);
+
+
 var bot = new TelegramBotClient(token);
 bot.StartReceiving(
     updateHandler: HandleUpdateAsync,
@@ -40,6 +43,7 @@ cts.Cancel();
 async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken token)
 {
     var chatid = update.Message.Chat.Id;
+    await Console.Out.WriteLineAsync("Handle Update Async now!");
     try
     {
         await (update.Type switch
@@ -61,6 +65,7 @@ async Task MessageHandlerAsync(ITelegramBotClient botClient, ChatId id, Message 
         new FindByPhone(),
         new FindByName()
     };
+    Console.WriteLine("Now iam Message Handler");
 
     var msg = message.Text.Split(' ');
     var commandName = msg.First();

@@ -15,18 +15,27 @@ var token = Environment.GetEnvironmentVariable("TOKEN")!;
 using var cts = new CancellationTokenSource();
 
 
-var files = Directory.GetFiles($"{env}/Articles", "*.html");
-var articles = files.Select(file => new Article(
-    Name: Path.GetFileNameWithoutExtension(file),
-    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{env}/Articles/{file.Split("/")[^1]}"))
-    {
-        ParseMode = ParseMode.Html
-    })).ToList();
 
-articles.ForEach(Console.WriteLine);
+
+
+//var files = Directory.GetFiles($"{env}/Articles", "*.html");
+//var articles = files.Select(file => new Article(
+//    Name: Path.GetFileNameWithoutExtension(file),
+//    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{env}/Articles/{file.Split("/")[^1]}"))
+//    {
+//        ParseMode = ParseMode.Html
+//    })).ToList();
+
+//articles.ForEach(Console.WriteLine);
 
 
 var bot = new TelegramBotClient(token);
+await bot.SetWebhookAsync("https://railway.app/project/87ab2b90-a530-4ea3-8844-cde8ba51cdf4/service/fb253fde-7f41-4e7e-9ab2-fe2779684846?id=13b40d98-8d89-42bb-9459-f8576a773fc7");
+var resp = await bot.GetWebhookInfoAsync();
+Console.WriteLine($"{resp.LastErrorMessage} | {resp.LastErrorDate}");
+
+
+
 bot.StartReceiving(
     updateHandler: HandleUpdateAsync,
     pollingErrorHandler: PollingErrorHandler,
@@ -86,7 +95,7 @@ async Task MessageHandlerAsync(ITelegramBotClient botClient, ChatId id, Message 
 async Task ExceptionTypeHandlerAsync(ITelegramBotClient bot, ChatId chatId, UpdateType? updateType = null) =>
     await bot.SendTextMessageAsync(
         chatId: chatId,
-        text: articles.First(article => article.Name == "ExceptionType").Value.MessageText + $"\nTypeError: {updateType}");
+        text: "halo" /*articles.First(article => article.Name == "ExceptionType").Value.MessageText + $"\nTypeError: {updateType}"*/);
 
 
 Task PollingErrorHandler(ITelegramBotClient bot, Exception ex, CancellationToken ct)

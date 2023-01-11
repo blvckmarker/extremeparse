@@ -4,11 +4,12 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 
-var currentDirectory = Directory.GetCurrentDirectory();
-var env = Environment.CurrentDirectory;
+var env = Path.GetFullPath(Environment.CurrentDirectory);
+var enc = Directory.GetDirectories(env);
 
-Console.WriteLine(currentDirectory);
-Console.WriteLine(env);
+foreach (var encPath in enc)
+    Console.WriteLine(encPath);
+
 #if DEBUG
 //currentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
 #endif
@@ -17,10 +18,10 @@ var token = Environment.GetEnvironmentVariable("TOKEN")!;
 using var cts = new CancellationTokenSource();
 
 
-var files = Directory.GetFiles($"{currentDirectory}/Articles", "*.html");
+var files = Directory.GetFiles($"{env}/Articles", "*.html");
 var articles = files.Select(file => new Article(
     Name: Path.GetFileNameWithoutExtension(file),
-    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{currentDirectory}/Articles/{file.Split("/")[^1]}"))
+    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{env}/Articles/{file.Split("/")[^1]}"))
     {
         ParseMode = ParseMode.Html
     })).ToList();

@@ -51,11 +51,15 @@ namespace ExtremeParse.Controllers
             if (card is null)
                 return BadRequest();
 
+
+
             logger.LogInformation($"[{DateTime.Now}] - created new card (Telegram)");
 
             card.Id = Guid.NewGuid();
             card.Creator = "Telegram-Bot";
             card.DateTime = DateTime.Now;
+
+            typeof(CardModel).GetProperties().ToList().ForEach(prop => { if (prop.GetValue(card) is null) prop.SetValue(card, "[I found nothing]"); });
 
             dataBaseSql.Export<CardModel>(card);
             return RedirectToAction("Index");

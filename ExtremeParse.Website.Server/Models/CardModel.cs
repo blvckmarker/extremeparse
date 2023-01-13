@@ -24,10 +24,6 @@
         }
 
         public DateTime DateTime { get; set; }
-        public string DateTimeParse
-        {
-            set => OnDateTimeChange?.Invoke(value, EventArgs.Empty);
-        }
 
         public override string ToString()
         {

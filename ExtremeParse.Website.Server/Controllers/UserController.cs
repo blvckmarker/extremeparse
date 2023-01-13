@@ -62,7 +62,7 @@ namespace ExtremeParse.Controllers
             typeof(CardModel).GetProperties().ToList().ForEach(prop => { if (prop.GetValue(card) is null) prop.SetValue(card, "[I found nothing]"); });
 
             dataBaseSql.Export<CardModel>(card);
-            return RedirectToAction("Index");
+            return Ok();
         }
 
 

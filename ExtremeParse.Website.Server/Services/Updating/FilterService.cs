@@ -1,6 +1,6 @@
-﻿using TryParse.Models;
+﻿using ExtremeParse.Models;
 
-namespace TryParse.Services.Updating
+namespace ExtremeParse.Services.Updating
 {
     public sealed class FilterService : IUpdateData
     {

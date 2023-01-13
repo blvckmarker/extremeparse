@@ -1,4 +1,4 @@
-﻿namespace TryParse.Models
+﻿namespace ExtremeParse.Models
 {
     public interface IModel
     {

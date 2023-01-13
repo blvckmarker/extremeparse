@@ -1,4 +1,4 @@
-﻿using TryParse.Models;
+﻿using ExtremeParse.Models;
 
 namespace ExtremeParse.Bot.Client.Mediator.Parser;
 internal static class ParserMediator

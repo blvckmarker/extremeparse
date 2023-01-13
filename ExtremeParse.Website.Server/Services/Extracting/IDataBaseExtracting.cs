@@ -1,6 +1,6 @@
-﻿using TryParse.Models;
+﻿using ExtremeParse.Models;
 
-namespace TryParse.Services.Extracting
+namespace ExtremeParse.Services.Extracting
 {
     public interface IDataBaseExtracting
     {

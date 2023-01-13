@@ -1,8 +1,8 @@
-﻿using System.Text.Json;
-using TryParse.Controllers;
-using TryParse.Models;
+﻿using ExtremeParse.Controllers;
+using ExtremeParse.Models;
+using System.Text.Json;
 
-namespace TryParse.Services.Extracting
+namespace ExtremeParse.Services.Extracting
 {
     public class DataBaseExtractingJson : IDataBaseExtracting
     {

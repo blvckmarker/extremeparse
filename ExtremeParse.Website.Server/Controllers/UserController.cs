@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ExtremeParse.Models;
+using ExtremeParse.Services.Extracting;
+using ExtremeParse.Services.Updating;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using TryParse.Models;
-using TryParse.Services.Extracting;
-using TryParse.Services.Updating;
 
-namespace TryParse.Controllers
+namespace ExtremeParse.Controllers
 {
     public class UserController : Controller
     {
@@ -43,6 +43,25 @@ namespace TryParse.Controllers
             }
         }
 
+
+        [HttpPost]
+        [Route("{controller}/api/tg/add")]
+        public IActionResult CreateCard([FromBody] CardModel card)
+        {
+            if (card is null)
+                return BadRequest();
+
+            logger.LogInformation($"[{DateTime.Now}] - created new card (Telegram)");
+
+            card.Id = Guid.NewGuid();
+            card.Creator = "Telegram-Bot";
+            card.DateTime = DateTime.Now;
+
+            dataBaseSql.Export<CardModel>(card);
+            return RedirectToAction("Index");
+        }
+
+
         [HttpPost]
         [Route("{controller}/api")]
         public IActionResult NewCard(CardModel newCard)
@@ -50,7 +69,7 @@ namespace TryParse.Controllers
             logger.LogInformation($"[{DateTime.Now}] - created new card");
 
             newCard.Id = Guid.NewGuid();
-            newCard.Creator = "Telegram-Bot";
+            newCard.Creator = "Parssa";
             newCard.DateTime = DateTime.Now;
 
             dataBaseSql.Export<CardModel>(newCard);

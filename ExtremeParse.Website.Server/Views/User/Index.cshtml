@@ -1,4 +1,4 @@
-﻿@using TryParse.Models;
+﻿@using ExtremeParse.Models;
 @model IEnumerable<IModel>
 @{
     ViewData["Title"] = "Main";
@@ -37,7 +37,7 @@
      </a>
     <div class="col-12 col-lg-auto mb-3 mb-lg-0">
         <button type="button" data-bs-toggle="modal" data-bs-target="#cardModal" class="my-1 btn btn-outline-danger">Create a new Parsed-Card</button>
-        <a href="https://t.me/MagmaLord14"><button type="button" class="my-1 btn btn-purple ">Create with our Telegram-Bot</button></a>
+        <a href="@Environment.GetEnvironmentVariable("TELEGRAM_PATH")"><button type="button" class="my-1 btn btn-purple ">Create with our Telegram-Bot</button></a>
     </div>
 </div>
 

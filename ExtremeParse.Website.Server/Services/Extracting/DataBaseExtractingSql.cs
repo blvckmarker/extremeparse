@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TryParse.Controllers;
-using TryParse.Models;
-using TryParse.Models.Context;
+using ExtremeParse.Controllers;
+using ExtremeParse.Models;
+using ExtremeParse.Models.Context;
 
-namespace TryParse.Services.Extracting
+namespace ExtremeParse.Services.Extracting
 {
     public class DataBaseExtractingSql : IDataBaseExtracting
     {

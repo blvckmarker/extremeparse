@@ -19,7 +19,7 @@ namespace ExtremeParse.Controllers
         private readonly FilterService filterService = new();
         private readonly ILogger logger;
 
-        private IEnumerable<IModel> GetCardsModel() => dataBaseSql.Import<CardModel>(dataBaseJson.DbPath);
+        private IEnumerable<IModel> GetCardsModel() => dataBaseSql.Import<CardModel>();
         public UserController(ILogger<UserController> logger)
         {
             this.logger = logger;

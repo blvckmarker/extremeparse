@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ExtremeParse.Controllers;
+﻿using ExtremeParse.Controllers;
 using ExtremeParse.Models;
 using ExtremeParse.Models.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExtremeParse.Services.Extracting
 {
@@ -45,7 +45,7 @@ namespace ExtremeParse.Services.Extracting
             db.SaveChanges();
         }
 
-        public IEnumerable<TModel> Import<TModel>(object? options) where TModel : IModel => db.Models as IEnumerable<TModel>;
+        public IEnumerable<TModel> Import<TModel>(object? options = null) where TModel : IModel => db.Models as IEnumerable<TModel>;
 
         public async Task Remove<TModel>(string guid) where TModel : IModel
         {

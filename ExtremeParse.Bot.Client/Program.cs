@@ -10,27 +10,24 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 
-var env = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent;
-//Environment.CurrentDirectory + '/' + Assembly.GetExecutingAssembly().GetName().Name;
-
-#if DEBUG
-//currentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
-#endif
+#region Locations
+var AssemblyLocation = Environment.GetEnvironmentVariable("PROJPATH");
+var ProjectServerLocation = AssemblyLocation + "\\ExtremeParse.Bot.Server";
+var ProjectClientLocation = AssemblyLocation + "\\ExtremeParse.Bot.Client";
+#endregion
 
 #region ParserMediatorConfigure
-var envFile = Environment.GetEnvironmentVariable("CONFPATH")!;
-StartServer(filename: "main.py", envFile: envFile);
-await Task.Delay(500);
-ParserMediator.Configure(envFile);
+await StartServerAsync(filename: ProjectServerLocation + "\\main.py", envFile: ProjectServerLocation + "\\.env");
+ParserMediator.Configure(ProjectServerLocation + "\\.env");
 #endregion
 
 var token = Environment.GetEnvironmentVariable("TOKEN")!;
 using var cts = new CancellationTokenSource();
 
-var files = Directory.GetFiles($"{env}\\Articles", "*.html");
+var files = Directory.GetFiles($"{ProjectClientLocation}\\Articles", "*.html");
 var articles = files.Select(file => new Article(
     Name: Path.GetFileNameWithoutExtension(file),
-    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{env}/Articles/{file.Split("\\")[^1]}"))
+    Value: new InputTextMessageContent(System.IO.File.ReadAllText($"{ProjectClientLocation}\\Articles\\{file.Split("\\")[^1]}"))
     {
         ParseMode = ParseMode.Html
     })).ToList();
@@ -138,7 +135,10 @@ async Task SendMsg(string message, ChatId id, ParseMode? mode = null)
         chatId: id,
         parseMode: mode);
 
-void StartServer(string filename, string envFile) =>
-    Process.Start("python", $"./../../../../ExtremeParse.Bot.Server/{filename} {envFile}");
+async Task StartServerAsync(string filename, string envFile)
+{
+    Process.Start("python", $"{filename} {envFile}");
+    await Task.Delay(500);
+}
 
 record class Article(string Name, InputTextMessageContent Value);

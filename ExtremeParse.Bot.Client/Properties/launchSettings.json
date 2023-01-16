@@ -4,7 +4,7 @@
       "commandName": "Project",
       "environmentVariables": {
         "TOKEN": "5713291587:AAH8ZsQlvaGDJEwZxDmpqQ186pi76nWHUOM",
-        "CONFPATH": "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse\\ExtremeParse.Bot.Server\\.env"
+        "PROJPATH": "C:\\Users\\Jesus\\source\\repos\\blvckmarker\\try2parse"
       }
     },
     "Docker": {

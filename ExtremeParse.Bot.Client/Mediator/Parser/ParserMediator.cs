@@ -1,4 +1,5 @@
 ﻿using ExtremeParse.Models;
+using Newtonsoft.Json;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Text;
 namespace ExtremeParse.Bot.Client.Mediator.Parser;
 internal static class ParserMediator
 {
-    private static TcpClient TcpClient = null!;
+    private static TcpClient TcpClient = new();
     private static IPAddress host = null!;
     private static string envPath = null!;
     private static int port;
@@ -14,18 +15,24 @@ internal static class ParserMediator
 
     public static async Task<CardModel> DispatchData(string commandName, string args)
     {
-        var message = Encoding.ASCII.GetBytes($"{commandName} {args}");
+        if (!TcpClient.Connected)
+            TcpClient = new(host.ToString(), port);
+
+
+
+        var message = Encoding.UTF8.GetBytes($"{commandName} {args}");
         using var stream = TcpClient.GetStream();
 
-        stream.Write(message, 0, message.Length);
-        message = new byte[4096];
+        await stream.WriteAsync(message);
+        message = new byte[stream.Socket.Available];
+        var bytes = await stream.ReadAsync(message, 0, message.Length);
 
-        var bytes = stream.Read(message, 0, message.Length);
-        var response = Encoding.ASCII.GetString(message, 0, bytes);
+        TcpClient.Close();
 
-        await Console.Out.WriteLineAsync($"Recieved {response}");
+        var response = Encoding.UTF8.GetString(message, 0, bytes);
+        var card = JsonConvert.DeserializeObject<CardModel>(response);
 
-        return new CardModel();
+        return card ?? new CardModel();
     }
 
     public static void Configure(string envfilepath)
@@ -36,7 +43,5 @@ internal static class ParserMediator
 
         host = IPAddress.Parse(envVariables.First(item => item.Name == "HOST").Value);
         port = int.Parse(envVariables.First(item => item.Name == "PORT").Value);
-
-        TcpClient = new TcpClient(host.ToString(), port);
     }
 }

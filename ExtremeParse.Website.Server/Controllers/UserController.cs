@@ -63,7 +63,7 @@ namespace ExtremeParse.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            logger.LogInformation($"[{DateTime.Now}] - created new card (Telegram)");
+            logger.LogInformation($"[{card.DateTime}] - created new card (Telegram)");
             return Ok();
         }
 

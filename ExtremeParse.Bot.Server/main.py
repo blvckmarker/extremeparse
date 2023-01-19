@@ -15,8 +15,8 @@ def start_server(envf: str):
         s.listen()
         
         print(f'Start listening on {port}')
+        conn, addr = s.accept()
         while True:
-            conn, addr = s.accept()
             print(port)
             data = conn.recv(1024) 
             if not data:

@@ -4,6 +4,7 @@ using ExtremeParse.Bot.Client.Mediator.Website.Server;
 using ExtremeParse.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Net;
 using System.Text.RegularExpressions;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -83,7 +84,7 @@ async Task MessageHandlerAsync(ITelegramBotClient botClient, ChatId id, Message 
 
     if (!new[] { Commands[0].CommandName, Commands[1].CommandName }.Contains(commandName))
     {
-        await SendMsg($"❌ | Ooops!\nSomething went wrong. Maybe I don't know `<code>{commandName}</code>` command!", id, ParseMode.Html);
+        await SendMsg($"❌ | Ooops!\nSomething went wrong. Maybe I don't know <code>{commandName}</code> command!", id, ParseMode.Html);
         return;
     }
 
@@ -113,8 +114,13 @@ async Task CallbackQueryHandlerAsync(ITelegramBotClient botClient, CallbackQuery
     data.Creator = "Telegram-Bot";
     data.DateTime = DateTime.Now;
 
-    await HttpClientSender.SendData(data);
-
+    var response = await HttpClientSender.SendData(data) switch
+    {
+        HttpStatusCode.OK => "✅ \\| Success, now you can see your public card on our [website](https://google.com)",
+        HttpStatusCode.BadRequest => "❌ \\| Fail\\! Bad request",
+        HttpStatusCode.NotFound => "❌ \\| [Critical] Error, cannot find a host"
+    };
+    await SendMsg(response, chatId, ParseMode.MarkdownV2);
 }
 
 async Task ExceptionTypeHandlerAsync(ChatId chatId, UpdateType? updateType = null) =>

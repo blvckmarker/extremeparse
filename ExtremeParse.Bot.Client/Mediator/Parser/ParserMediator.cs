@@ -22,15 +22,21 @@ internal static class ParserMediator
             bytesSend += await socket.SendAsync(request.AsMemory(), SocketFlags.None);
 
         var responseBytes = new byte[1024];
-        int bytesRead = 0;
+        var responseChars = new char[1024];
 
-        while (socket.Available != 0)
-            bytesRead += await socket.ReceiveAsync(responseBytes, SocketFlags.None);
+        int charCount = 0;
 
-        var responseString = Encoding.ASCII.GetString(responseBytes, 0, bytesRead);
-        var card = JsonConvert.DeserializeObject<CardModel>(responseString);
+        while (true)
+        {
+            int waitFor = socket.Available;
+            int bytesRecieved = await socket.ReceiveAsync(responseBytes, SocketFlags.None);
 
-        //(responseBytes, 0, bytesRecieved, responseChars, 0);
+            charCount = Encoding.ASCII.GetChars(responseBytes, 0, bytesRecieved, responseChars, 0);
+
+            if (bytesRecieved == waitFor || waitFor == 0) break;
+        }
+        var response = Encoding.ASCII.GetString(responseBytes, 0, charCount);
+        var card = JsonConvert.DeserializeObject<CardModel>(response);
 
         return card;
     }

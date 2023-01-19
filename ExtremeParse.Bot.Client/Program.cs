@@ -1,6 +1,6 @@
 ﻿using ExtremeParse.Bot.Client.Commands;
 using ExtremeParse.Bot.Client.Mediator.Parser;
-using ExtremeParse.Bot.Client.Mediator.Site.Server;
+using ExtremeParse.Bot.Client.Mediator.Website.Server;
 using ExtremeParse.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -113,7 +113,7 @@ async Task CallbackQueryHandlerAsync(ITelegramBotClient botClient, CallbackQuery
     data.Creator = "Telegram-Bot";
     data.DateTime = DateTime.Now;
 
-    await TcpClientSender.SendData(data);
+    await HttpClientSender.SendData(data);
 
 }
 

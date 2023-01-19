@@ -48,20 +48,22 @@ namespace ExtremeParse.Controllers
         [Route("{controller}/api/tg/add")]
         public IActionResult CreateCard([FromBody] CardModel card)
         {
-            if (card is null)
-                return BadRequest();
+            try
+            {
 
+                card.Id = Guid.NewGuid();
+                card.Creator = "Telegram-Bot";
+                card.DateTime = DateTime.Now;
 
+                typeof(CardModel).GetProperties().ToList().ForEach(prop => { if (prop.GetValue(card) is null) prop.SetValue(card, "[I found nothing]"); });
 
+                dataBaseSql.Export<CardModel>(card);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
             logger.LogInformation($"[{DateTime.Now}] - created new card (Telegram)");
-
-            card.Id = Guid.NewGuid();
-            card.Creator = "Telegram-Bot";
-            card.DateTime = DateTime.Now;
-
-            typeof(CardModel).GetProperties().ToList().ForEach(prop => { if (prop.GetValue(card) is null) prop.SetValue(card, "[I found nothing]"); });
-
-            dataBaseSql.Export<CardModel>(card);
             return Ok();
         }
 

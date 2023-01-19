@@ -12,19 +12,19 @@ def start_server(envf: str):
         with open(envf, 'w') as fs:
             host, port = s.getsockname()
             fs.write(f"PORT={port}\nHOST={host}")
-        s.listen(1)
+        s.listen()
         
         print(f'Start listening on {port}')
         while True:
             conn, addr = s.accept()
             print(port)
-            data = conn.recv(1024)
+            data = conn.recv(1024) 
             if not data:
                 break
 
             print('[Server] Recieved: ' + data.decode())
 
-            response = '{"Name": "Samuel", "Description": "hallo", "Info": "kekw"}'.encode()
+            response = '{"Name": "Samuel", "Description": "hallo", "Info": "kekw"}'.encode() 
             conn.sendall(response)
         print('Exited')
 

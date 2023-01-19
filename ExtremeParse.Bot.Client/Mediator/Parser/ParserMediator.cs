@@ -7,7 +7,7 @@ using System.Text;
 namespace ExtremeParse.Bot.Client.Mediator.Parser;
 internal static class ParserMediator
 {
-    private static TcpClient TcpClient = new();
+    private static Socket socket = null!;
     private static IPAddress host = null!;
     private static string envPath = null!;
     private static int port;
@@ -15,24 +15,24 @@ internal static class ParserMediator
 
     public static async Task<CardModel> DispatchData(string commandName, string args)
     {
-        if (!TcpClient.Connected)
-            TcpClient = new(host.ToString(), port);
+        var request = Encoding.ASCII.GetBytes($"{commandName} {args}");
 
+        int bytesSend = 0;
+        while (bytesSend < request.Length)
+            bytesSend += await socket.SendAsync(request.AsMemory(), SocketFlags.None);
 
+        var responseBytes = new byte[1024];
+        int byteRead = 0;
 
-        var message = Encoding.UTF8.GetBytes($"{commandName} {args}");
-        using var stream = TcpClient.GetStream();
+        while (socket.Available != 0)
+            byteRead += await socket.ReceiveAsync(responseBytes, SocketFlags.None);
 
-        await stream.WriteAsync(message);
-        message = new byte[stream.Socket.Available];
-        var bytes = await stream.ReadAsync(message, 0, message.Length);
+        var responseString = Encoding.ASCII.GetString(responseBytes, 0, byteRead);
+        var card = JsonConvert.DeserializeObject<CardModel>(responseString);
 
-        TcpClient.Close();
+        //(responseBytes, 0, bytesRecieved, responseChars, 0);
 
-        var response = Encoding.UTF8.GetString(message, 0, bytes);
-        var card = JsonConvert.DeserializeObject<CardModel>(response);
-
-        return card ?? new CardModel();
+        return card;
     }
 
     public static void Configure(string envfilepath)
@@ -43,5 +43,8 @@ internal static class ParserMediator
 
         host = IPAddress.Parse(envVariables.First(item => item.Name == "HOST").Value);
         port = int.Parse(envVariables.First(item => item.Name == "PORT").Value);
+
+        socket = new(SocketType.Stream, ProtocolType.Tcp);
+        socket.Connect(host, port);
     }
 }

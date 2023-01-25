@@ -24,7 +24,7 @@ def start_server(envf: str):
 
             print('[Server] Recieved: ' + data.decode())
 
-            response = '{"Name": "Samuel", "Description": "hallo", "Info": "kekw"}'.encode() 
+            response = '{"Name": "Vasiliy", "Description": "From a Telegram!", "Info": "Infotmation"}'.encode() 
             conn.sendall(response)
         print('Exited')
 
